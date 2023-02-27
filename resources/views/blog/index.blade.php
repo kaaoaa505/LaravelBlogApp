@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('_layouts.app')
 
 @section('content')
     <div class="col-md-8">
@@ -99,5 +99,5 @@
         </nav>
     </div>
 
-    @include('layouts.sidebar')
+    @include('_partial.sidebar')
 @endsection
