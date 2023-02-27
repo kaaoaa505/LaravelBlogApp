@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->text('excerpt');
+            $table->text('body');
+            $table->text('image')->nullable();
+            
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(now())->useCurrentOnUpdate();
+
+            $table->foreignId('author_id')->references('id')->on('users')->onDelete('restrict');
         });
     }
 
