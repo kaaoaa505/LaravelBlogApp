@@ -21,7 +21,7 @@ class PostFactory extends Factory
 
         $body = fake()->paragraphs(5, true);
 
-        $image = 'Post_Image_' . rand(0, 5) . '.jpg';
+        $image = 'Post_Image_' . rand(1, 5) . '.jpg';
 
         $users = User::pluck('id')->toArray();
         shuffle($users);
