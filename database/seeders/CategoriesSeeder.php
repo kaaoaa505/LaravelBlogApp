@@ -9,6 +9,6 @@ class CategoriesSeeder extends Seeder
 {
     public function run(): void
     {
-        Category::factory(3)->create();
+        Category::factory(10)->create();
     }
 }
