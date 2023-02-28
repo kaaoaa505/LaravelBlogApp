@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use DB;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,12 +46,19 @@ class Post extends Model
 
     public function getDate()
     {
-        return date_format($this->created_at, 'F d, Y') . ' | ' . $this->created_at->diffForhumans();
+        $date = Carbon::create($this->published_at);
+
+        return date_format($date, 'F d, Y') . ' | ' . $date->diffForhumans();
     }
 
-    public function scopeLatestFirst()
+    public function scopeLatestFirst($query)
     {
-        return $this->orderBy('created_at', 'desc');
+        return $query->orderBy('published_at', 'desc');
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('published_at', '<=', DB::raw('NOW()'));
     }
 
 }
