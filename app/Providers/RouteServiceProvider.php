@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -17,13 +18,17 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
     public function boot(): void
     {
+        $this->bind('post' ,function($slug){
+            return Post::published()->where('slug', $slug)->firstOrFail();
+        });
+
         $this->configureRateLimiting();
 
         $this->routes(function () {
