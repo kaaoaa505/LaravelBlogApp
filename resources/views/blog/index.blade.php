@@ -7,7 +7,7 @@
 
                 @if (!empty($post->image))
                     <div class="post-item-image">
-                        <a href="{{ route('blog.show', $post->id) }}">
+                        <a href="{{ route('blog.show', $post->slug) }}">
                             <img src="{{ $post->getImageUrl() }}" alt="{{ $post->title }}">
                         </a>
                     </div>
@@ -33,7 +33,7 @@
                             </ul>
                         </div>
                         <div class="pull-right">
-                            <a href="{{ route('blog.show', $post->id) }}">Continue Reading &raquo;</a>
+                            <a href="{{ route('blog.show', $post->slug) }}">Continue Reading &raquo;</a>
                         </div>
                     </div>
                 </div>
