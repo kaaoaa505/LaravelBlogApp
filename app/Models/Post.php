@@ -7,6 +7,7 @@ use DB;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class Post extends Model
 {
@@ -59,6 +60,11 @@ class Post extends Model
     public function scopePublished($query)
     {
         return $query->where('published_at', '<=', DB::raw('NOW()'));
+    }
+
+    public function getBodyContent()
+    {
+        return Markdown::convert($this->body)->getContent();
     }
 
 }
