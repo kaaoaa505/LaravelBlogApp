@@ -26,6 +26,16 @@ class Post extends Model
         'category_id',
     ];
 
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function getSlug()
     {
         $slug = str()->slug($this->title);
@@ -36,11 +46,6 @@ class Post extends Model
         }
 
         return $slug;
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(User::class);
     }
 
     public function getImageUrl()

@@ -16,6 +16,11 @@ class Category extends Model
         'slug',
     ];
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     public function getSlug()
     {
         $slug = str()->slug($this->title);
