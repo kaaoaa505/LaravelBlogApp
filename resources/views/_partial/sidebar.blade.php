@@ -20,7 +20,7 @@
                 <ul class="categories">
                     @foreach ($categories as $category)
                         <li>
-                            <a class="text-capitalize font-monospace" href="{{route('blog.category', $category->id)}}"><i class="fa fa-angle-right"></i>{{ $category->title }}</a>
+                            <a class="text-capitalize font-monospace" href="{{route('blog.category', $category->slug)}}"><i class="fa fa-angle-right"></i>{{ $category->title }}</a>
                             <span class="badge pull-right">{{ $category->posts()->published()->count() }}</span>
                         </li>
                     @endforeach

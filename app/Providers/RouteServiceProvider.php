@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -27,6 +28,10 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->bind('post' ,function($slug){
             return Post::published()->where('slug', $slug)->firstOrFail();
+        });
+
+        $this->bind('category' ,function($slug){
+            return Category::where('slug', $slug)->firstOrFail();
         });
 
         $this->configureRateLimiting();
