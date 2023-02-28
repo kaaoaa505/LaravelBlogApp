@@ -3,11 +3,12 @@
 @section('content')
     <div class="col-md-8">
         <article class="post-item post-detail">
-            <div class="post-item-image">
-                <a href="#">
-                    <img src="/img/{{ $post->image }}" alt="">
-                </a>
-            </div>
+
+            @if (!empty($post->image))
+                <div class="post-item-image">
+                    <img src="{{ $post->getImageUrl() }}" alt="{{ $post->title }}">
+                </div>
+            @endif
 
             <div class="post-item-body">
                 <div class="padding-10">
