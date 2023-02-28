@@ -9,6 +9,8 @@ class Post extends Model
 {
     use HasFactory;
 
+    public $timestamps = true;
+
     protected $fillable = [
         'title',
         'slug',
@@ -17,6 +19,11 @@ class Post extends Model
         'image',
         'author_id',
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function getImageUrl()
     {
@@ -31,6 +38,16 @@ class Post extends Model
         }
 
         return $imgUrl;
+    }
+
+    public function getDate()
+    {
+        return date_format($this->created_at, 'F d, Y') . ' | ' . $this->created_at->diffForhumans();
+    }
+
+    public function scopeLatestFirst()
+    {
+        return $this->orderBy('created_at', 'desc');
     }
 
 }

@@ -5,25 +5,25 @@
         <article class="post-item post-detail">
             <div class="post-item-image">
                 <a href="#">
-                    <img src="/img/{{$post->image}}" alt="">
+                    <img src="/img/{{ $post->image }}" alt="">
                 </a>
             </div>
 
             <div class="post-item-body">
                 <div class="padding-10">
-                    <h1>{{$post->title}}</h1>
+                    <h1>{{ $post->title }}</h1>
 
                     <div class="post-meta no-border">
                         <ul class="post-meta-group">
-                            <li><i class="fa fa-user"></i><a href="#"> Admin</a></li>
-                            <li><i class="fa fa-clock-o"></i><time> February 12, 2016</time></li>
+                            <li><i class="fa fa-user"></i><a href="#"> {{ $post->author->name }}</a></li>
+                            <li><i class="fa fa-clock-o"></i><time> {{ $post->getDate() }}</time></li>
                             <li><i class="fa fa-tags"></i><a href="#"> Blog</a></li>
                             <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
                         </ul>
                     </div>
 
                     <p>
-                        {{$post->body}}
+                        {{ $post->body }}
                     </p>
                 </div>
             </div>
@@ -56,5 +56,4 @@
     </div>
 
     @include('_partial.sidebar')
-    
 @endsection
