@@ -19,7 +19,7 @@
                         <h2><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a></h2>
 
                         <p>
-                            {{ $post->excerpt }}
+                            {!! $post->excerpt_html !!}
                         </p>
                     </div>
 

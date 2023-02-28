@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,10 +23,12 @@ class PostFactory extends Factory
 
         $title = fake()->sentence();
 
-        usleep(1);
-        
-        $hrtime = hrtime(true);
-        $slug = str()->slug($title) . '_' . "{$hrtime}". '_' . rand(1000, 9999);
+        $slug = str()->slug($title);
+        $slugsFoundCount = Post::where('slug', 'regexp', "^" . $slug . "(-[0-9])?")->count();
+
+        if ($slugsFoundCount > 0) {
+            $slug .= '_' . ($slugsFoundCount + 1);
+        }
 
         $excerpt = fake()->sentence(rand(8, 12));
 
@@ -36,6 +40,11 @@ class PostFactory extends Factory
         shuffle($users);
         $user = $users[0];
 
+        $categories = Category::pluck('id')->toArray();
+
+        shuffle($categories);
+        $category = $categories[0];
+
         return [
             'title' => $title,
             'slug' => $slug,
@@ -43,6 +52,7 @@ class PostFactory extends Factory
             'body' => $body,
             'image' => fake()->boolean() ? $image : null,
             'author_id' => $user,
+            'category_id' => $category,
             'created_at' => $date1,
             'updated_at' => $date2,
             'published_at' => rand(1,0) ? $date3 : null,

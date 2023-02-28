@@ -23,7 +23,20 @@ class Post extends Model
         'image',
         'author_id',
         'published_at',
+        'category_id',
     ];
+
+    public function getSlug()
+    {
+        $slug = str()->slug($this->title);
+        $slugsFoundCount = static::where('slug', 'regexp', "^" . $slug . "(-[0-9])?")->count();
+
+        if ($slugsFoundCount > 0) {
+            $slug .= '_' . ($slugsFoundCount + 1);
+        }
+
+        return $slug;
+    }
 
     public function author()
     {
@@ -70,6 +83,11 @@ class Post extends Model
     public function getBodyHtmlAttribute()
     {
         return Markdown::convert($this->body)->getContent();
+    }
+
+    public function getExcerptHtmlAttribute()
+    {
+        return Markdown::convert($this->excerpt)->getContent();
     }
 
 }
