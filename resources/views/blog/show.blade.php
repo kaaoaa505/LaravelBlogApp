@@ -24,7 +24,7 @@
                     </div>
 
                     <p>
-                        {!! $post->getBodyContent() !!}
+                        {!! $post->body_html !!}
                     </p>
                 </div>
             </div>

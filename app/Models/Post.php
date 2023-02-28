@@ -67,4 +67,9 @@ class Post extends Model
         return Markdown::convert($this->body)->getContent();
     }
 
+    public function getBodyHtmlAttribute()
+    {
+        return Markdown::convert($this->body)->getContent();
+    }
+
 }
