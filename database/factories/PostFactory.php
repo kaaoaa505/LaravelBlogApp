@@ -9,6 +9,15 @@ class PostFactory extends Factory
 {
     public function definition(): array
     {
+        $date = now();
+
+        $date1 = clone($date);
+        $date2 = clone($date);
+        $date3 = clone($date);
+
+        $date1->addDays(rand(-1,-10));
+        $date2->addDays(rand(-20,-30));
+        $date3->addDays(rand(10,20));
 
         $title = fake()->sentence();
 
@@ -34,6 +43,9 @@ class PostFactory extends Factory
             'body' => $body,
             'image' => fake()->boolean() ? $image : null,
             'author_id' => $user,
+            'published_at' => rand(1,0) ? $date1 : null,
+            'created_at' => $date2,
+            'updated_at' => $date3,
         ];
     }
 }

@@ -18,6 +18,7 @@ class Post extends Model
         'body',
         'image',
         'author_id',
+        'published_at',
     ];
 
     public function author()
